@@ -1,1 +1,1 @@
-# chessboard-memorization-tool
+# Chessboard Memorization Tool
