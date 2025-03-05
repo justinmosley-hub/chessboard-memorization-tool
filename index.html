@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chessboard Memorization Tool</title>
+    <style>
+        .board {
+            display: grid;
+            grid-template-columns: repeat(8, 100px);
+            grid-template-rows: repeat(8, 100px);
+            gap: 2px;
+            width: 416px;
+            margin-left: 20px;
+        }
+
+        .clickable-square {
+            width: 100px;
+            height: 100px;
+            background-color: grey;
+            border-radius: 0px;
+            border: 0px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .clickable-square:active {
+            background-color: white;
+        }
+
+        .clickable-square:hover {
+            background-color: lightgrey;
+        }
+
+        .clicked {
+            background-color: yellow;
+        }
+
+        .light {
+            background-color: lightgrey;
+        }
+
+        .light:hover {
+            background-color: white; /* Change light squares to white on hover */
+        }
+
+        .dark {
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <h2 style="text-align:center;">Chessboard Memorization</h2>
+    <div class="board" id="chessboard"></div>
+    <script>
+        function toggleClicked(element) {
+            element.classList.toggle('clicked');
+        }
+
+        const files = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+        const ranks = [8, 7, 6, 5, 4, 3, 2, 1];
+
+        const board = document.getElementById('chessboard');
+        let squares = [];
+        for (let r = 0; r < ranks.length; r++) {
+            for (let f = 0; f < files.length; f++) {
+                let squareName = files[f] + ranks[r];
+                let square = document.createElement('div');
+                square.classList.add('clickable-square');
+                square.setAttribute('onclick', 'toggleClicked(this)');
+                // Alternate colors
+                if ((r + f) % 2 === 0) {
+                    square.classList.add('light');
+                } else {
+                    square.classList.add('dark');
+                }
+                square.dataset.name = squareName;
+                //square.innerText = squareName;
+                board.appendChild(square);
+                squares.push(square);
+            }
+        }
+    </script>
+</body>
+
+</html>
